@@ -267,8 +267,6 @@ elif [ "${shortname}" == "ios" ]; then
 elif [ "${shortname}" == "kf2" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
-elif [ "${shortname}" == "nmrih" ]; then
-	fn_fix_steamclient_so "32" "${serverfiles}/bin"
 elif [ "${shortname}" == "ns" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 elif [ "${shortname}" == "ns2c" ]; then

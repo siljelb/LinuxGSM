@@ -145,8 +145,6 @@ fi
 if [ "${shortname}" == "ahl" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
-elif [ "${shortname}" == "ahl2" ]; then
-	fn_fix_steamclient_so "32" "${serverfiles}/bin"
 elif [ "${shortname}" == "ark" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
@@ -190,8 +188,6 @@ elif [ "${shortname}" == "btl" ]; then
 elif [ "${shortname}" == "ck" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
-elif [ "${shortname}" == "cc" ]; then
-	fn_fix_steamclient_so "32" "${serverfiles}/bin"
 elif [ "${shortname}" == "col" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
@@ -206,8 +202,6 @@ elif [ "${shortname}" == "cs" ]; then
 elif [ "${shortname}" == "cscz" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
-elif [ "${shortname}" == "css" ]; then
-	fn_fix_steamclient_so "32" "${serverfiles}/bin"
 elif [ "${shortname}" == "ct" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
@@ -245,8 +239,6 @@ elif [ "${shortname}" == "eco" ]; then
 elif [ "${shortname}" == "em" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
-elif [ "${shortname}" == "fof" ]; then
-	fn_fix_steamclient_so "32" "${serverfiles}/bin"
 elif [ "${shortname}" == "gmod" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"

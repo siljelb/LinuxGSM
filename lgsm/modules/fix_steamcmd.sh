@@ -14,8 +14,22 @@ fn_fix_steamclient_so() {
 	# $1 type of fix 32 or 64 as possible values
 	# $2 as destination where the lib will be copied to
 	if [ "$1" == "32" ]; then
+		# get md5sum of steamclient.so
+		if [ -f "${2}/steamclient.so" ]; then
+			steamclientmd5=$(md5sum "${2}/steamclient.so" | awk '{print $1;}')
+		fi
+
+		# get md5sum of steamclient.so from steamcmd
+		if [ -f "${HOME}/.steam/steamcmd/linux32/steamclient.so" ]; then
+			steamcmdsteamclientmd5=$(md5sum "${HOME}/.steam/steamcmd/linux32/steamclient.so" | awk '{print $1;}')
+		elif [ -f "${steamcmddir}/linux32/steamclient.so" ]; then
+			steamcmdsteamclientmd5=$(md5sum "${steamcmddir}/linux32/steamclient.so" | awk '{print $1;}')
+		elif [ -f "${HOME}/.local/share/Steam/steamcmd/linux32/steamclient.so" ]; then
+			steamcmdsteamclientmd5=$(md5sum "${HOME}/.local/share/Steam/steamcmd/linux32/steamclient.so" | awk '{print $1;}')
+		fi
+
 		# steamclient.so x86 fix.
-		if [ ! -f "${2}/steamclient.so" ]; then
+		if [ ! -f "${2}/steamclient.so" ] || [ "${steamcmdsteamclientmd5}" != "${steamclientmd5}" ]; then
 			fixname="steamclient.so x86"
 			fn_fix_msg_start
 			if [ ! -d "${2}" ]; then
@@ -31,8 +45,22 @@ fn_fix_steamclient_so() {
 			fn_fix_msg_end
 		fi
 	elif [ "$1" == "64" ]; then
+		# get md5sum of steamclient.so
+		if [ -f "${2}/steamclient.so" ]; then
+			steamclientmd5=$(md5sum "${2}/steamclient.so" | awk '{print $1;}')
+		fi
+
+		# get md5sum of steamclient.so from steamcmd
+		if [ -f "${HOME}/.steam/steamcmd/linux64/steamclient.so" ]; then
+			steamcmdsteamclientmd5=$(md5sum "${HOME}/.steam/steamcmd/linux64/steamclient.so" | awk '{print $1;}')
+		elif [ -f "${steamcmddir}/linux64/steamclient.so" ]; then
+			steamcmdsteamclientmd5=$(md5sum "${steamcmddir}/linux64/steamclient.so" | awk '{print $1;}')
+		elif [ -f "${HOME}/.local/share/Steam/steamcmd/linux64/steamclient.so" ]; then
+			steamcmdsteamclientmd5=$(md5sum "${HOME}/.local/share/Steam/steamcmd/linux64/steamclient.so" | awk '{print $1;}')
+		fi
+
 		# steamclient.so x86_64 fix.
-		if [ ! -f "${2}/steamclient.so" ]; then
+		if [ ! -f "${2}/steamclient.so" ] || [ "${steamcmdsteamclientmd5}" != "${steamclientmd5}" ]; then
 			fixname="steamclient.so x86_64"
 			fn_fix_msg_start
 			if [ ! -d "${2}" ]; then
@@ -114,24 +142,147 @@ if [ ! -f "${steamclientsdk32}" ]; then
 fi
 
 # steamclient.so fixes
-if [ "${shortname}" == "bo" ]; then
+if [ "${shortname}" == "ahl" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "ahl2" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+elif [ "${shortname}" == "ark" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+	fn_fix_steamclient_so "64" "${serverfiles}/ShooterGame/Binaries/Linux"
+elif [ "${shortname}" == "arma3" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "ats" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "av" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "bb" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "bb2" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "bd" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "bmdm" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+elif [ "${shortname}" == "bo" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
 	fn_fix_steamclient_so "32" "${serverfiles}/BODS_Data/Plugins/x86"
 	fn_fix_steamclient_so "64" "${serverfiles}/BODS_Data/Plugins/x86_64"
+elif [ "${shortname}" == "bs" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+	fn_fix_steamclient_so "64" "${serverfiles}/bin/linux64"
+elif [ "${shortname}" == "bt" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "btl" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "ck" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "cc" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+elif [ "${shortname}" == "col" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
 elif [ "${shortname}" == "cmw" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
 	fn_fix_steamclient_so "32" "${executabledir}/lib"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+	fn_fix_steamclient_so "32" "${serverfiles}/Binaries/Linux/lib"
 elif [ "${shortname}" == "cs" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}"
-elif [ "${shortname}" == "col" ]; then
-	fn_fix_steamclient_so "64" "${serverfiles}"
-elif [ "${shortname}" == "ins" ]; then
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "cscz" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "css" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+elif [ "${shortname}" == "ct" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "dab" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "dayz" ]; then
+	fn_fix_steamclient_so "64" "${serverfiles}"
+elif [ "${shortname}" == "dmc" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "dod" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "dodr" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/Dragons/Binaries/Linux"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "dods" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+elif [ "${shortname}" == "doi" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "dst" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+	fn_fix_steamclient_so "32" "${serverfiles}/bin/lib32"
+	fn_fix_steamclient_so "64" "${serverfiles}/bin64/lib64"
+elif [ "${shortname}" == "dys" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/bin/linux32"
+elif [ "${shortname}" == "eco" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "em" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "fof" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+elif [ "${shortname}" == "gmod" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "hldm" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "hw" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "kf" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/System"
+elif [ "${shortname}" == "ins" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+elif [ "${shortname}" == "inss" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+elif [ "${shortname}" == "ios" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+elif [ "${shortname}" == "kf2" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
+elif [ "${shortname}" == "nmrih" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/bin"
+elif [ "${shortname}" == "ns" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+elif [ "${shortname}" == "ns2c" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}/ia32"
+elif [ "${shortname}" == "opfor" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
 elif [ "${shortname}" == "pz" ]; then
 	fn_fix_steamclient_so "32" "${serverfiles}/linux32"
 	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
 elif [ "${shortname}" == "pvr" ]; then
 	fn_fix_steamclient_so "64" "${executabledir}"
-elif [ "${shortname}" == "ss3" ]; then
-	fn_fix_steamclient_so "32" "${serverfiles}/Bin"
+elif [ "${shortname}" == "ricochet" ]; then
+	fn_fix_steamclient_so "32" "${serverfiles}"
+	fn_fix_steamclient_so "64" "${serverfiles}/linux64"
 elif [ "${shortname}" == "tu" ]; then
 	fn_fix_steamclient_so "64" "${executabledir}"
 elif [ "${shortname}" == "unt" ]; then
